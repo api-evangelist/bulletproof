@@ -1,0 +1,83 @@
+generated: '2026-08-08'
+method: probed
+source:
+- live query of publicApiVersions on https://shop.bulletproof.com/api/2026-01/graphql.json
+- https://shop.bulletproof.com/.well-known/ucp
+- graphql/bulletproof-storefront.graphql
+note: >-
+  Bulletproof publishes no versioning policy, no deprecation policy, no SLA and no status
+  page of its own. Everything below was read out of the live surface on 2026-08-08. The
+  version calendar and the deprecation markers are real and machine-readable; the policy
+  documents behind them are Shopify's, not Bulletproof's, and are therefore recorded as
+  absent for this provider.
+versioning:
+  scheme: date-based path segment
+  path_template: /api/{YYYY-MM}/graphql.json
+  current_in_catalog: '2026-01'
+  latest: '2026-07'
+  policy_url: null
+  supported:
+  - version: '2025-10'
+    supported: true
+  - version: '2026-01'
+    supported: true
+  - version: '2026-04'
+    supported: true
+  - version: '2026-07'
+    supported: true
+    label: Latest
+  - version: '2026-10'
+    supported: false
+    label: Release candidate
+  - version: unstable
+    supported: false
+  observed:
+    unknown_version_returns: 404
+    version_echo_header: x-shopify-api-version
+  older_versions_still_answering: ['2024-10', '2025-01', '2025-07']
+protocol_versions:
+  ucp:
+    current: '2026-04-08'
+    supported: ['2026-04-08', '2026-01-23']
+    source: https://shop.bulletproof.com/.well-known/ucp
+  mcp:
+    protocol_version: '2024-11-05'
+    server_version: 0.1.0
+    source: initialize response from https://shop.bulletproof.com/api/ucp/mcp
+deprecation:
+  policy_url: null
+  sunset_header: false
+  mechanism: >-
+    GraphQL @deprecated directives carried in the schema itself — 54 deprecated fields
+    across 40 types, each with a machine-readable deprecationReason naming the
+    replacement field. This is the only deprecation signal Bulletproof exposes.
+  deprecated_field_count: 54
+  examples:
+  - field: Cart.estimatedCost
+    reason: Use `cost` instead.
+  - field: Cart.discountAllocations
+    reason: 'Use `cart.lines[].discountAllocations(lineLevelOnly: false)` instead.'
+  - field: Article.author
+    reason: Use `authorV2` instead.
+  - field: BaseCartLine.estimatedCost
+    reason: Use `cost` instead.
+  - field: CartBuyerIdentity.deliveryAddressPreferences
+    reason: Use `cart.delivery` instead.
+  - field: AppliedGiftCard.balanceV2
+    reason: Use `balance` instead.
+sla:
+  url: null
+  uptime_target: null
+status_page:
+  url: null
+  probed:
+  - url: https://status.bulletproof.com
+    result: NXDOMAIN
+  note: >-
+    No first-party status page. The underlying platform status pages (status.shopify.com,
+    wpenginestatus.com) are not Bulletproof properties and are not recorded as such.
+changelog:
+  url: null
+  note: >-
+    No dated API changelog on any Bulletproof host. The editorial blog at
+    https://www.bulletproof.com/blog/ is product/nutrition content, not release notes.

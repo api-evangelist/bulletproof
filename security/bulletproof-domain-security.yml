@@ -1,0 +1,22 @@
+generated: '2026-08-08'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: www.bulletproof.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Oct 28 02:46:37 2026 GMT
+  hsts: false
+- host: shop.bulletproof.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Oct 27 22:34:01 2026 GMT
+  hsts: true
+  hsts_max_age: 7889238
+domains:
+- domain: bulletproof.com
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: reject

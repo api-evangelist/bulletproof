@@ -1,0 +1,110 @@
+{
+  "products": [
+    {
+      "id": 7249910661155,
+      "title": "Brain Octane\u00ae C8 MCT Powder, 8.8 oz.",
+      "handle": "brain-octane-c8-mct-powder-8-8-oz",
+      "body_html": "<style>\n.product-detail__description li {\n    list-style: disc;\n}</style>\nCreamy, flavorless and easy to mix, Brain Octane\u00ae C8 MCT Powder delivers the benefits of C8 MCTs without the mess of traditional oils. Each scoop contains 6g of coconut-sourced C8, the most ketogenic MCT, which rapidly converts into ketones to support: <br><br>\n<ul>\n<li> \nQuick and lasting energy\u2020 </li>\n\n<li>Mental clarity and focus\u2020 </li>\n\n<li>Feelings of fullness\u2020 </li>\n\n</ul> \nAdd it to coffee, smoothies and more for an easy way to fuel your brain and body.",
+      "published_at": "2026-07-28T09:18:44-07:00",
+      "created_at": "2026-07-06T11:41:12-07:00",
+      "updated_at": "2026-08-08T08:00:40-07:00",
+      "vendor": "Bulletproof",
+      "product_type": "MCT Oil",
+      "tags": [
+        "boo",
+        "BYOB",
+        "coupon_eligible",
+        "new-in",
+        "powders",
+        "SUBSCRIPTION: True"
+      ],
+      "variants": [
+        {
+          "id": 43322577387555,
+          "title": "Default Title",
+          "option1": "Default Title",
+          "option2": null,
+          "option3": null,
+          "sku": "NUT04-00027",
+          "requires_shipping": true,
+          "taxable": true,
+          "featured_image": null,
+          "available": true,
+          "price": "29.99",
+          "grams": 259,
+          "compare_at_price": null,
+          "position": 1,
+          "product_id": 7249910661155,
+          "created_at": "2026-07-06T11:41:12-07:00",
+          "updated_at": "2026-08-08T08:00:40-07:00"
+        }
+      ],
+      "images": [
+        {
+          "id": 35534859042851,
+          "created_at": "2026-07-06T11:38:04-07:00",
+          "position": 1,
+          "updated_at": "2026-07-06T11:38:06-07:00",
+          "product_id": 7249910661155,
+          "variant_ids": [],
+          "src": "https://cdn.shopify.com/s/files/1/0004/3470/0319/files/bulletproof-product-render-brain-octane-mct-powder-with-scoop.jpg?v=1783363086",
+          "width": 1200,
+          "height": 1200
+        },
+        {
+          "id": 35534859075619,
+          "created_at": "2026-07-06T11:38:04-07:00",
+          "position": 2,
+          "updated_at": "2026-07-06T11:38:06-07:00",
+          "product_id": 7249910661155,
+          "variant_ids": [],
+          "src": "https://cdn.shopify.com/s/files/1/0004/3470/0319/files/easy-to-mix-mct-powder-into-coffee-with-rtbs.jpg?v=1783363086",
+          "width": 1200,
+          "height": 1200
+        },
+        {
+          "id": 35534859010083,
+          "created_at": "2026-07-06T11:38:04-07:00",
+          "position": 3,
+          "updated_at": "2026-07-06T11:38:06-07:00",
+          "product_id": 7249910661155,
+          "variant_ids": [],
+          "src": "https://cdn.shopify.com/s/files/1/0004/3470/0319/files/brain-power-in-every-scoop-benefits-with-people-smiling-playing-tennis-and-scooping-powder-into-smoothie.jpg?v=1783363086",
+          "width": 1200,
+          "height": 1200
+        },
+        {
+          "id": 35534859108387,
+          "created_at": "2026-07-06T11:38:04-07:00",
+          "position": 4,
+          "updated_at": "2026-07-06T11:38:06-07:00",
+          "product_id": 7249910661155,
+          "variant_ids": [],
+          "src": "https://cdn.shopify.com/s/files/1/0004/3470/0319/files/image-of-woman-using-mct-powder-in-yogurt-bowl.jpg?v=1783363086",
+          "width": 1200,
+          "height": 1200
+        },
+        {
+          "id": 35534859141155,
+          "created_at": "2026-07-06T11:38:04-07:00",
+          "position": 5,
+          "updated_at": "2026-07-06T11:38:06-07:00",
+          "product_id": 7249910661155,
+          "variant_ids": [],
+          "src": "https://cdn.shopify.com/s/files/1/0004/3470/0319/files/supplement-facts-and-ingredients-image-with-mct-powder-scooping-into-smoothie.jpg?v=1783363086",
+          "width": 1200,
+          "height": 1200
+        }
+      ],
+      "options": [
+        {
+          "name": "Title",
+          "position": 1,
+          "values": [
+            "Default Title"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,146 @@
+generated: '2026-08-08'
+method: derived
+source:
+- mcp/bulletproof-ucp-mcp-tools.json
+- graphql/bulletproof-storefront.graphql
+note: >-
+  Bulletproof publishes no OpenAPI, so this crosswalk binds each UCP MCP tool to the
+  Storefront GraphQL field(s) that expose the same capability rather than to REST
+  operationIds. Both surfaces were introspected live on 2026-08-08 — the 13 tools from
+  an anonymous tools/list, the 424-type schema from an anonymous GraphQL introspection.
+  The two surfaces are separate projections of the same store: the MCP tools are UCP
+  primitives served by Shopify's universal-commerce server, the GraphQL fields are the
+  Storefront API. Nothing here asserts that one is implemented on top of the other, so
+  every binding is marked semantic and confidence is set accordingly.
+surfaces:
+  openapi:
+    present: false
+    note: no OpenAPI or Swagger published on any Bulletproof host (probed 2026-08-08)
+  graphql:
+    endpoint: https://shop.bulletproof.com/api/2026-01/graphql.json
+    introspection: open
+    sdl: graphql/bulletproof-storefront.graphql
+    types: 424
+  mcp:
+    url: https://shop.bulletproof.com/api/ucp/mcp
+    tools_list: open
+    tools_call: gated (UCP agent profile URI required; JWT required for order/checkout)
+    manifest: mcp/bulletproof-mcp.yml
+crosswalk:
+- tool: search_catalog
+  category: catalog
+  graphql: [products, search, predictiveSearch]
+  binding: semantic
+  confidence: high
+  note: QueryRoot.search and QueryRoot.products both accept a query string with cursor pagination.
+- tool: lookup_catalog
+  category: catalog
+  graphql: [nodes, product, productByHandle]
+  binding: semantic
+  confidence: medium
+  note: QueryRoot.nodes resolves a list of gids; the MCP tool caps the batch at 10 identifiers.
+- tool: get_product
+  category: catalog
+  graphql: [product, productByHandle]
+  binding: semantic
+  confidence: high
+  note: >-
+    Product.selectedOrFirstAvailableVariant / variantBySelectedOptions cover the tool's
+    selected/preferences option-narrowing behaviour.
+- tool: get_cart
+  category: cart
+  graphql: [cart]
+  binding: semantic
+  confidence: high
+- tool: create_cart
+  category: cart
+  graphql: [cartCreate]
+  binding: semantic
+  confidence: high
+- tool: update_cart
+  category: cart
+  graphql: [cartLinesAdd, cartLinesUpdate, cartLinesRemove, cartAttributesUpdate, cartNoteUpdate, cartDiscountCodesUpdate, cartBuyerIdentityUpdate]
+  binding: semantic
+  confidence: medium
+  note: one MCP tool fans out to seven GraphQL mutations; the tool takes a whole cart object.
+- tool: cancel_cart
+  category: cart
+  graphql: []
+  binding: none
+  confidence: low
+  note: >-
+    No Storefront mutation cancels or deletes a cart. The closest field is
+    cartRemovePersonalData, which is not equivalent.
+- tool: create_checkout
+  category: checkout
+  graphql: [cartCreate, cartPrepareForCompletion]
+  binding: semantic
+  confidence: low
+  note: >-
+    The Storefront API retired the Checkout object; checkout now runs through the Cart
+    completion mutations, so this is a capability match, not an object match.
+- tool: get_checkout
+  category: checkout
+  graphql: [cart, cartCompletionAttempt]
+  binding: semantic
+  confidence: low
+- tool: update_checkout
+  category: checkout
+  graphql: [cartDeliveryAddressesUpdate, cartSelectedDeliveryOptionsUpdate, cartPaymentUpdate, cartBillingAddressUpdate]
+  binding: semantic
+  confidence: medium
+- tool: complete_checkout
+  category: checkout
+  graphql: [cartSubmitForCompletion]
+  binding: semantic
+  confidence: medium
+  note: >-
+    The MCP tool accepts meta["idempotency-key"]; the GraphQL mutation takes an
+    attemptId that serves the same replay-safety role.
+- tool: cancel_checkout
+  category: checkout
+  graphql: []
+  binding: none
+  confidence: low
+- tool: get_order
+  category: order
+  graphql: [customer]
+  binding: semantic
+  confidence: low
+  note: >-
+    There is no QueryRoot.order field. Orders are reachable only as Customer.orders
+    behind a customer access token, whereas the MCP tool takes an order id plus a JWT.
+mcp_only:
+- tool: cancel_cart
+  reason: no Storefront GraphQL mutation cancels a cart
+- tool: cancel_checkout
+  reason: no Storefront GraphQL mutation cancels a checkout
+- tool: get_order
+  reason: >-
+    order retrieval by id is not exposed on the Storefront API; it is a UCP/agent-JWT
+    capability only
+graphql_only:
+- capability: content
+  fields: [article, articles, blog, blogByHandle, blogs, page, pageByHandle, pages]
+  reason: the store's blog/page content has no UCP tool
+- capability: navigation and storefront metadata
+  fields: [menu, shop, localization, locations, paymentSettings, sitemap, urlRedirects, publicApiVersions]
+- capability: merchandising
+  fields: [collection, collectionByHandle, collections, productTags, productTypes, productRecommendations]
+  reason: collections and recommendations are not surfaced as UCP tools
+- capability: customer identity and addresses
+  fields: [customerAccessTokenCreate, customerAccessTokenRenew, customerAccessTokenDelete, customerCreate, customerUpdate, customerRecover, customerReset, customerActivate, customerAddressCreate, customerAddressUpdate, customerAddressDelete, customerDefaultAddressUpdate]
+  reason: UCP delegates identity to the OAuth/OIDC customer-account surface
+- capability: gift cards and metafields
+  fields: [cartGiftCardCodesAdd, cartGiftCardCodesRemove, cartGiftCardCodesUpdate, cartMetafieldsSet, cartMetafieldDelete, metaobject, metaobjects]
+- capability: Shop Pay
+  fields: [shopPayPaymentRequestSessionCreate, shopPayPaymentRequestSessionSubmit, shopPayInstallmentsPricing]
+  reason: the agents.md instructs agents to route Shop Pay through the shop.app skill instead
+rest_only: []
+coverage:
+  mcp_tools: 13
+  mcp_tools_bound_to_graphql: 10
+  mcp_only: 3
+  graphql_root_query_fields: 36
+  graphql_mutation_fields: 41
+  graphql_fields_with_a_tool: 15

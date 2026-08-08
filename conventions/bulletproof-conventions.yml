@@ -1,0 +1,118 @@
+generated: '2026-08-08'
+method: derived
+source:
+- https://shop.bulletproof.com/agents.md
+- mcp/bulletproof-ucp-mcp-tools.json
+- graphql/bulletproof-storefront.graphql
+- observed response headers on https://shop.bulletproof.com/api/2026-01/graphql.json
+note: >-
+  Cross-cutting request/response semantics observed live on 2026-08-08. Nothing here is
+  taken from a vendor doc that Bulletproof does not itself serve; every value was either
+  read out of a Bulletproof-hosted document or observed on the wire.
+authentication:
+  summary: >-
+    Three of four surfaces answer anonymously (Storefront GraphQL, storefront JSON,
+    WordPress REST). The UCP MCP endpoint requires a UCP agent profile URI on every
+    tool call and a JWT for order/checkout tools.
+  artifact: authentication/bulletproof-authentication.yml
+idempotency:
+  supported: true
+  mechanism: request-body metadata field
+  key: meta.idempotency-key
+  scope: complete_checkout only
+  description: >-
+    The complete_checkout MCP tool declares an optional string property
+    meta["idempotency-key"] described as "An idempotency key for completing the
+    checkout". It is the single idempotency control on the whole Bulletproof surface —
+    no other MCP tool and no GraphQL mutation exposes one, and there is no
+    Idempotency-Key HTTP header anywhere.
+  evidence: mcp/bulletproof-ucp-mcp-tools.json (complete_checkout.inputSchema.properties.meta.properties)
+  graphql_analogue:
+    mutation: cartSubmitForCompletion
+    field: attemptId
+    note: replay-safety token for cart completion; queryable afterwards via cartCompletionAttempt.
+  enforced_error:
+    code: IDEMPOTENCY_KEY_ALREADY_USED
+    enum: UserErrorsShopPayPaymentRequestSessionUserErrorsCode
+    note: >-
+      The Shop Pay payment-request session mutations return an explicit
+      IDEMPOTENCY_KEY_ALREADY_USED user error, which confirms keys are enforced rather
+      than merely accepted.
+  retention: not published
+pagination:
+  graphql:
+    style: relay-cursor
+    params: [first, last, after, before]
+    response_fields: [edges, node, cursor, pageInfo.hasNextPage, pageInfo.hasPreviousPage, pageInfo.startCursor, pageInfo.endCursor]
+  mcp:
+    style: cursor
+    param: pagination.cursor
+    note: >-
+      search_catalog documents "Results are paginated, with initial results limited to
+      improve experience. Use the pagination.cursor from the response to fetch
+      additional pages."
+  storefront_json:
+    style: page/limit
+    params: [limit, page]
+    endpoint: /products.json
+identifiers:
+  format: Shopify global id (gid)
+  examples:
+  - gid://shopify/Product/1320950595707
+  - gid://shopify/Checkout/abc123
+  human_key: handle (URL slug), used by productByHandle / collectionByHandle and /products/{handle}.json
+  lookup_batch_limit: 10 identifiers per lookup_catalog call
+field_selection:
+  graphql: native field selection; connections require an explicit first/last
+  metafields: Product, Cart, Customer and Metaobject all expose metafield/metafields for merchant-defined data
+request_tracing:
+  header: x-request-id
+  example_shape: f8f10550-1f5a-4bb2-9981-590f27afa94f-1786201134
+  additional:
+  - header: server-timing
+    note: reports processing, db, edge POP, requestID and the resolved GraphQL selection names
+  - header: x-shopify-api-version
+    note: echoes the date version that actually served the request
+versioning:
+  scheme: date-based path segment
+  current: '2026-01'
+  latest_available: '2026-07'
+  path: /api/{YYYY-MM}/graphql.json
+  artifact: lifecycle/bulletproof-lifecycle.yml
+error_envelope:
+  graphql:
+    shape: '{ "errors": [ { "message", "locations", "extensions" } ], "data": null }'
+    mutation_errors: userErrors[] / cartUserErrors[] carried inside the payload with code + field
+  mcp:
+    shape: 'JSON-RPC 2.0 { "jsonrpc", "id", "error": { "code", "message", "data" } }'
+    observed_codes: [-32000, -32001]
+  artifact: errors/bulletproof-problem-types.yml
+rate_limiting:
+  graphql:
+    model: query cost / complexity
+    response_headers: [shopify-complexity-score, shopify-complexity-score-v2]
+    response_body: extensions.cost.requestedQueryCost
+    published_ceiling: not published by Bulletproof
+  mcp:
+    model: per-IP
+    published_ceiling: not published
+    guidance: >-
+      agents.md states "The MCP endpoint is rate-limited per IP. Back off on 429
+      responses."
+agent_rules:
+  source: https://shop.bulletproof.com/agents.md
+  rules:
+  - Checkout requires contemporaneous human approval; agents must not complete payment without explicit buyer consent.
+  - Agents that cannot obtain buyer approval at the moment of payment are told to route through the Shop Pay skill instead.
+  - Back off on HTTP 429 from the MCP endpoint.
+  - Pass context.address_country and context.currency for accurate pricing and availability.
+  - Prefer the declared tool surface over screen-scraping or scripting the storefront.
+cors:
+  access_control_allow_origin: '*'
+  observed_on: https://shop.bulletproof.com/api/2026-01/graphql.json
+cross_links:
+  authentication: authentication/bulletproof-authentication.yml
+  scopes: scopes/bulletproof-scopes.yml
+  errors: errors/bulletproof-problem-types.yml
+  lifecycle: lifecycle/bulletproof-lifecycle.yml
+  mcp: mcp/bulletproof-mcp.yml

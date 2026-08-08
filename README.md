@@ -42,5 +42,32 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-BulletProof is a company surfaced via the API Evangelist harvest backlog (source: secondary-market) and added to the network as a stub for full-pipeline profiling.
-- https://forgeglobal.com/bulletproof_stock/
+Bulletproof (Bulletproof 360, Inc.) is a Seattle-founded functional nutrition and
+health-and-wellness brand — toxin-tested coffee, C8 MCT oil, collagen, creamers and
+supplements — founded in 2013 by Dave Asprey and sold direct-to-consumer and through
+national retail.
+
+Bulletproof is not a software vendor and publishes no developer program, no API
+reference and no `security.txt`. It nonetheless exposes a real, callable, largely
+unauthenticated machine surface, all of it profiled here from public probes on
+2026-08-08:
+
+- **Storefront GraphQL API** — `https://shop.bulletproof.com/api/2026-01/graphql.json`
+  answered anonymous introspection: 424 types, 36 root queries, 41 mutations. SDL in
+  [`graphql/`](graphql/).
+- **UCP agentic-commerce MCP endpoint** — `https://shop.bulletproof.com/api/ucp/mcp`
+  returned 13 tools with full JSON Schema input contracts from an anonymous
+  `tools/list`. Manifest and verbatim tool list in [`mcp/`](mcp/).
+- **Agent instructions** — the store serves its own `/agents.md` and `/llms.txt`,
+  including an explicit buyer-approval rule on checkout. Captured verbatim in
+  [`skills/`](skills/) and [`llms/`](llms/).
+- **OAuth 2.0 / OpenID Connect discovery** for customer accounts, plus an RFC 9728
+  protected-resource document. Captured in [`well-known/`](well-known/).
+- **WordPress REST API** behind the editorial site: 16 namespaces, 384 routes, no
+  advertised authentication.
+
+No A2A agent card was found on any host, so none was authored.
+
+- Company: https://www.bulletproof.com/
+- Store: https://shop.bulletproof.com/
+- Secondary market: https://forgeglobal.com/bulletproof_stock/

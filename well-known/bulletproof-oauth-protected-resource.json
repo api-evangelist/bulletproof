@@ -1,0 +1,10 @@
+{
+    "resource": "https://shop.bulletproof.com",
+    "authorization_servers": [
+        "https://account.bulletproof.com",
+        "https://shopify.com/authentication/434700319"
+    ],
+    "bearer_methods_supported": [
+        "header"
+    ]
+}

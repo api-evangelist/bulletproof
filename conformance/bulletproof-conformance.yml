@@ -1,0 +1,104 @@
+generated: '2026-08-08'
+method: derived
+source:
+- well-known/bulletproof-openid-configuration.json
+- well-known/bulletproof-oauth-authorization-server.json
+- well-known/bulletproof-oauth-protected-resource.json
+- well-known/bulletproof-ucp.json
+- mcp/bulletproof-ucp-mcp-tools.json
+- graphql/bulletproof-storefront.graphql
+- security/bulletproof-domain-security.yml
+note: >-
+  Standards conformance asserted only where a Bulletproof-hosted document or a live
+  response proves it. Bulletproof publishes no compliance program, certifications or
+  trust center, so no Compliance pointer is emitted.
+standards:
+- id: graphql
+  conforms: true
+  evidence: >-
+    Anonymous introspection at https://shop.bulletproof.com/api/2026-01/graphql.json
+    returned a complete 424-type __schema with QueryRoot and Mutation.
+- id: graphql-cursor-connections
+  conforms: true
+  evidence: Relay-style edges/node/cursor/pageInfo connections throughout the schema.
+- id: mcp
+  conforms: true
+  evidence: >-
+    initialize returned protocolVersion 2024-11-05 with tools, prompts, resources and
+    logging capabilities; tools/list returned 13 tools with JSON Schema 2020-12 inputSchema.
+- id: json-schema-2020-12
+  conforms: true
+  evidence: 'Every MCP tool inputSchema declares $schema: https://json-schema.org/draft/2020-12/schema'
+- id: ucp
+  conforms: true
+  version: '2026-04-08'
+  evidence: >-
+    /.well-known/ucp advertises services, capabilities and payment handlers for UCP
+    2026-04-08 and 2026-01-23.
+- id: oauth2
+  conforms: true
+  evidence: authorizationCode flow with PKCE S256 advertised in the discovery documents.
+- id: oidc
+  conforms: true
+  evidence: >-
+    /.well-known/openid-configuration with issuer, jwks_uri, RS256 id tokens and the
+    openid scope.
+- id: rfc8414-oauth-authorization-server-metadata
+  conforms: true
+  evidence: /.well-known/oauth-authorization-server returns 200 with issuer + endpoints.
+- id: rfc9728-oauth-protected-resource-metadata
+  conforms: true
+  evidence: >-
+    /.well-known/oauth-protected-resource returns 200 on shop., account. and the
+    myshopify origin.
+- id: rfc7636-pkce
+  conforms: true
+  evidence: 'code_challenge_methods_supported: [S256]'
+- id: llmstxt
+  conforms: true
+  evidence: >-
+    /llms.txt served at 200 on both shop.bulletproof.com (agent instructions) and
+    www.bulletproof.com (Yoast-generated content index).
+- id: agents-md
+  conforms: true
+  evidence: /agents.md served at 200 on shop.bulletproof.com.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: >-
+    No application/problem+json anywhere; GraphQL uses errors[]/userErrors[] and the MCP
+    endpoint uses JSON-RPC 2.0 error objects.
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: /.well-known/security.txt returned 404 on all four hosts.
+- id: rfc8615-agent-card
+  conforms: false
+  evidence: >-
+    /.well-known/agent-card.json and /.well-known/agent.json both 404 on all four hosts.
+- id: openapi
+  conforms: false
+  evidence: >-
+    No OpenAPI or Swagger document found at any probed path on the API, storefront or
+    docs hosts.
+- id: asyncapi
+  conforms: false
+  evidence: No event or streaming surface published; no AsyncAPI document.
+- id: dnssec
+  conforms: false
+  evidence: 'security/bulletproof-domain-security.yml: dnssec false, no CAA records on bulletproof.com'
+- id: dmarc
+  conforms: true
+  evidence: 'DMARC present with policy reject on bulletproof.com'
+- id: hsts
+  conforms: partial
+  evidence: >-
+    shop.bulletproof.com sets Strict-Transport-Security (max-age 7889238);
+    www.bulletproof.com sets none.
+compliance_program:
+  published: false
+  certifications: []
+  trust_center: null
+  probed:
+  - url: https://trust.bulletproof.com
+    result: NXDOMAIN
+  - url: https://www.bulletproof.com/security
+    status: 404

@@ -1,0 +1,77 @@
+{
+    "data": {
+        "shop": {
+            "name": "Bulletproof",
+            "primaryDomain": {
+                "url": "https://shop.bulletproof.com"
+            },
+            "paymentSettings": {
+                "currencyCode": "USD",
+                "countryCode": "US",
+                "acceptedCardBrands": [
+                    "VISA",
+                    "MASTERCARD",
+                    "AMERICAN_EXPRESS",
+                    "DISCOVER"
+                ]
+            }
+        },
+        "products": {
+            "edges": [
+                {
+                    "node": {
+                        "id": "gid://shopify/Product/1320950595707",
+                        "handle": "brain-octane-oil-32-oz",
+                        "title": "Brain Octane\u00ae C8 MCT Oil, 32 oz.",
+                        "vendor": "Bulletproof",
+                        "productType": "MCT Oil",
+                        "availableForSale": true,
+                        "priceRange": {
+                            "minVariantPrice": {
+                                "amount": "49.99",
+                                "currencyCode": "USD"
+                            }
+                        }
+                    }
+                },
+                {
+                    "node": {
+                        "id": "gid://shopify/Product/1320949776507",
+                        "handle": "coffee-the-original-ground-12oz",
+                        "title": "Bulletproof\u2122 Original Ground Coffee",
+                        "vendor": "Bulletproof",
+                        "productType": "Coffee",
+                        "availableForSale": true,
+                        "priceRange": {
+                            "minVariantPrice": {
+                                "amount": "19.99",
+                                "currencyCode": "USD"
+                            }
+                        }
+                    }
+                },
+                {
+                    "node": {
+                        "id": "gid://shopify/Product/1498142212131",
+                        "handle": "collagen-protein-17-6oz",
+                        "title": "Unflavored Collagen Peptides, 17.6 oz.",
+                        "vendor": "Bulletproof",
+                        "productType": "Proteins",
+                        "availableForSale": true,
+                        "priceRange": {
+                            "minVariantPrice": {
+                                "amount": "44.95",
+                                "currencyCode": "USD"
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+    },
+    "extensions": {
+        "cost": {
+            "requestedQueryCost": 12
+        }
+    }
+}

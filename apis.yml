@@ -1,18 +1,105 @@
 aid: bulletproof
 name: BulletProof
-description: 'BulletProof is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: 'Bulletproof (Bulletproof 360, Inc.) is a Seattle-founded functional
+  nutrition and health-and-wellness brand — toxin-tested coffee, C8 MCT oil, collagen,
+  creamers and supplements — founded in 2013 by Dave Asprey and sold direct-to-consumer
+  and through national retail. Bulletproof is not a software vendor and publishes no
+  developer program, yet its commerce and content stacks expose a real, callable,
+  unauthenticated machine surface: a Shopify Storefront GraphQL API that answers
+  introspection anonymously at shop.bulletproof.com, a live UCP (Universal Commerce
+  Protocol) MCP endpoint whose tools/list returns 13 agent tools with full JSON Schema
+  input contracts, OAuth 2.0 / OpenID Connect discovery documents for customer
+  accounts, agent-facing llms.txt and agents.md instructions on the storefront, and a
+  384-route WordPress REST API behind the editorial site.'
 url: https://raw.githubusercontent.com/api-evangelist/bulletproof/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
+x-tier: profiled
+x-tier-reason: enrichment-2026-08-08
+image: https://cdn.shopify.com/s/files/1/0004/3470/0319/files/bp-logo-large.png?v=1785948157
 specificationVersion: '0.20'
 created: '2026-08-08'
 modified: '2026-08-08'
 tags:
 - Company
-apis: []
+- Consumer Packaged Goods
+- Food and Beverage
+- Health and Wellness
+- Supplements
+- Ecommerce
+- Direct to Consumer
+- Retail
+- Agentic Commerce
+- Shopify
+apis:
+- name: Bulletproof Storefront GraphQL API
+  description: 'The Shopify Storefront GraphQL API served from the Bulletproof store
+    host. Anonymous introspection succeeded on 2026-08-08 (424 types, QueryRoot +
+    Mutation), and anonymous queries against shop, products, collections and cart
+    return live data. Date-versioned (2024-10 through 2026-01 plus unstable all
+    answered 200) with cost/complexity reported per request.'
+  humanURL: https://shop.bulletproof.com/agents.md
+  baseURL: https://shop.bulletproof.com/api/2026-01/graphql.json
+  tags:
+  - GraphQL
+  - Ecommerce
+  - Storefront
+  properties:
+  - type: GraphQL
+    url: graphql/bulletproof-storefront.graphql
+  - type: Examples
+    url: examples/bulletproof-storefront-graphql-response.json
+  - type: DataModel
+    url: data-model/bulletproof-data-model.yml
+- name: Bulletproof UCP Agentic Commerce MCP
+  description: 'A live Model Context Protocol endpoint implementing the Universal
+    Commerce Protocol (UCP) for agent-driven commerce. An anonymous tools/list
+    returned 13 tools with complete JSON Schema input contracts covering catalog
+    search/lookup, product detail, cart, checkout and order. initialize reports
+    serverInfo universal-commerce 0.1.0 on MCP protocol 2024-11-05. Tool calls
+    require a resolvable UCP agent profile URI, and order/checkout tools additionally
+    require a JWT.'
+  humanURL: https://shop.bulletproof.com/agents.md
+  baseURL: https://shop.bulletproof.com/api/ucp/mcp
+  tags:
+  - MCP
+  - Agentic Commerce
+  - UCP
+  properties:
+  - type: MCPServer
+    url: mcp/bulletproof-mcp.yml
+  - type: ToolCrosswalk
+    url: mcp/bulletproof-tool-crosswalk.yml
+  - type: Examples
+    url: examples/bulletproof-ucp-mcp-initialize.json
+- name: Bulletproof Storefront JSON Catalog
+  description: 'The unauthenticated Shopify storefront JSON catalog endpoints
+    (/products.json, /collections.json, /products/{handle}.json,
+    /collections/{handle}/products.json) documented in the store''s own agents.md as
+    the read-only browsing surface for agents that do not need to transact.'
+  humanURL: https://shop.bulletproof.com/agents.md
+  baseURL: https://shop.bulletproof.com
+  tags:
+  - Ecommerce
+  - Catalog
+  - JSON
+  properties:
+  - type: Examples
+    url: examples/bulletproof-storefront-products-json.json
+- name: Bulletproof WordPress Content REST API
+  description: 'The WordPress REST API behind the Bulletproof editorial site
+    (bulletproof.com), self-describing 16 namespaces and 384 routes at /wp-json/ with
+    no authentication schemes advertised. Covers posts, pages, recipes, reviewers and
+    taxonomies used across the coffee, supplement, diet and recipe article libraries.'
+  humanURL: https://www.bulletproof.com/
+  baseURL: https://www.bulletproof.com/wp-json/wp/v2
+  tags:
+  - Content
+  - REST
+  - WordPress
+  properties:
+  - type: Discovery
+    url: https://www.bulletproof.com/wp-json/
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -20,4 +107,51 @@ maintainers:
   email: info@apis.io
 common:
 - type: Website
+  url: https://www.bulletproof.com/
+- type: SecondaryMarket
   url: https://forgeglobal.com/bulletproof_stock/
+- type: Documentation
+  url: https://shop.bulletproof.com/agents.md
+- type: GitHubOrganization
+  url: https://github.com/bulletproof360
+- type: Blog
+  url: https://www.bulletproof.com/blog/
+- type: BlogRSS
+  url: https://www.bulletproof.com/feed/
+- type: Support
+  url: https://shop.bulletproof.com/pages/contact-us
+- type: SignUp
+  url: https://shop.bulletproof.com/account/login
+- type: TermsOfService
+  url: https://shop.bulletproof.com/policies/terms-of-service
+- type: PrivacyPolicy
+  url: https://shop.bulletproof.com/policies/privacy-policy
+- type: LLMsTxt
+  url: llms/bulletproof-llms.txt
+- type: WellKnown
+  url: well-known/bulletproof-well-known.yml
+- type: Authentication
+  url: authentication/bulletproof-authentication.yml
+- type: OAuthScopes
+  url: scopes/bulletproof-scopes.yml
+- type: Conventions
+  url: conventions/bulletproof-conventions.yml
+- type: Idempotency
+  url: conventions/bulletproof-conventions.yml
+- type: ErrorCatalog
+  url: errors/bulletproof-problem-types.yml
+- type: DeclineCodes
+  url: errors/bulletproof-decline-codes.yml
+- type: Lifecycle
+  url: lifecycle/bulletproof-lifecycle.yml
+- type: Conformance
+  url: conformance/bulletproof-conformance.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: DomainSecurity
+  url: security/bulletproof-domain-security.yml
+x-enrichment:
+  date: '2026-08-08'
+  status: enriched
+  artifacts_added: 27
+  pass: local-v1
