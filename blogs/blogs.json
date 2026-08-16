@@ -1,0 +1,21 @@
+{
+  "repo": "bulletproof",
+  "feeds": [
+    {
+      "source": "https://github.com/bulletproof360",
+      "feed_url": "https://github.com/bulletproof360",
+      "title": "",
+      "saved": 0,
+      "method": "none"
+    },
+    {
+      "source": "https://www.bulletproof.com/blog/",
+      "feed_url": "https://www.bulletproof.com/blog/feed/",
+      "title": "",
+      "saved": 3,
+      "method": "discovered"
+    }
+  ],
+  "post_count": 3,
+  "fetched": "2026-08-15T12:22:01Z"
+}
