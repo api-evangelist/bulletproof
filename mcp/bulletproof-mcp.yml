@@ -23,10 +23,9 @@ server:
       listChanged: true
     logging: {}
   platform: Shopify (Universal Commerce Protocol, ucp.dev)
-  operator_note: >-
-    This endpoint is served from Bulletproof's own storefront host and is advertised by
-    Bulletproof's own agents.md, but the server implementation is Shopify's native UCP
-    service rather than a Bulletproof-authored MCP server.
+  operator_note: This endpoint is served from Bulletproof's own storefront host and is advertised by Bulletproof's
+    own agents.md, but the server implementation is Shopify's native UCP service rather than a Bulletproof-authored
+    MCP server.
 protocol:
   name: Universal Commerce Protocol
   spec: https://ucp.dev/2026-04-08/specification/overview/
@@ -50,11 +49,9 @@ protocol:
   - dev.shopify.shop_pay
 access:
   tools_list: anonymous
-  tools_call: >-
-    Every call requires meta["ucp-agent"].profile — a resolvable agent profile URI. An
-    unresolvable profile returns JSON-RPC -32001 "UCP discovery failed". Order and
-    checkout tools additionally return -32000 "AuthenticationRequired" without a valid
-    JWT (see https://shopify.dev/docs/agents/get-started/authentication).
+  tools_call: Every call requires meta["ucp-agent"].profile — a resolvable agent profile URI. An unresolvable
+    profile returns JSON-RPC -32001 "UCP discovery failed". Order and checkout tools additionally return
+    -32000 "AuthenticationRequired" without a valid JWT (see https://shopify.dev/docs/agents/get-started/authentication).
   buyer_approval_required: true
   rate_limited: per IP (agents.md instructs back-off on 429)
 tools_source: mcp/bulletproof-ucp-mcp-tools.json
@@ -114,3 +111,11 @@ x-evidence:
     url: https://shop.bulletproof.com/api/ucp/mcp
     http_status: 403
     result: JSON-RPC -32000 AuthenticationRequired
+deployment:
+  mode: remote
+  endpoint: https://shop.bulletproof.com/api/ucp/mcp
+  verified: probed
+  probe: live
+  tools: 13
+  checked: '2026-08-12'
+  source: catalog MCP census
