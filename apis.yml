@@ -26,6 +26,17 @@ tags:
 - Food and Beverage
 - Health and Wellness
 - Supplements
+- E-Commerce
+- Direct to Consumer
+- Retail
+- Agentic Commerce
+- Shopify
+tags_raw:
+- Company
+- Consumer Packaged Goods
+- Food and Beverage
+- Health and Wellness
+- Supplements
 - Ecommerce
 - Direct to Consumer
 - Retail
@@ -41,6 +52,10 @@ apis:
   humanURL: https://shop.bulletproof.com/agents.md
   baseURL: https://shop.bulletproof.com/api/2026-01/graphql.json
   tags:
+  - GraphQL
+  - E-Commerce
+  - Storefront
+  tags_raw:
   - GraphQL
   - Ecommerce
   - Storefront
@@ -80,6 +95,10 @@ apis:
   humanURL: https://shop.bulletproof.com/agents.md
   baseURL: https://shop.bulletproof.com
   tags:
+  - E-Commerce
+  - Catalog
+  - JSON
+  tags_raw:
   - Ecommerce
   - Catalog
   - JSON
