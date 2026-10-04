@@ -91,6 +91,9 @@ apis:
     url: examples/bulletproof-storefront-graphql-response.json
   - type: DataModel
     url: data-model/bulletproof-data-model.yml
+  x-surface: platform-generated
+  x-platform: shopify
+  x-platform-surface: storefront-graphql
 - name: Bulletproof UCP Agentic Commerce MCP
   description: 'A live Model Context Protocol endpoint implementing the Universal
     Commerce Protocol (UCP) for agent-driven commerce. An anonymous tools/list
@@ -116,6 +119,9 @@ apis:
     url: mcp/bulletproof-tool-crosswalk.yml
   - type: Examples
     url: examples/bulletproof-ucp-mcp-initialize.json
+  x-surface: platform-generated
+  x-platform: shopify
+  x-platform-surface: ucp
 - name: Bulletproof Storefront JSON Catalog
   description: 'The unauthenticated Shopify storefront JSON catalog endpoints
     (/products.json, /collections.json, /products/{handle}.json,
@@ -134,20 +140,23 @@ apis:
   properties:
   - type: Examples
     url: examples/bulletproof-storefront-products-json.json
-- name: Bulletproof WordPress Content REST API
-  description: 'The WordPress REST API behind the Bulletproof editorial site
-    (bulletproof.com), self-describing 16 namespaces and 384 routes at /wp-json/ with
-    no authentication schemes advertised. Covers posts, pages, recipes, reviewers and
-    taxonomies used across the coffee, supplement, diet and recipe article libraries.'
-  humanURL: https://www.bulletproof.com/
-  baseURL: https://www.bulletproof.com/wp-json/wp/v2
+  x-surface: platform-generated
+  x-platform: shopify
+  x-platform-surface: storefront-json
+- aid: bulletproof:bulletproof-com-website-wordpress-rest
+  name: BulletProof Website (WordPress REST)
+  description: 'The public WordPress REST API (wp-json) of the BulletProof website at www.bulletproof.com:
+    the route index of the site''s content management system, catalogued as one site surface rather than
+    as separate APIs.'
+  baseURL: https://www.bulletproof.com/wp-json
   tags:
-  - Content
-  - REST
   - WordPress
+  x-surface: platform-generated
   properties:
-  - type: Discovery
-    url: https://www.bulletproof.com/wp-json/
+  - type: Documentation
+    url: https://www.bulletproof.com/wp-json
+  x-platform: wordpress
+  x-platform-surface: rest
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
