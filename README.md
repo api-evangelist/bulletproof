@@ -64,32 +64,114 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Bulletproof (Bulletproof 360, Inc.) is a Seattle-founded functional nutrition and
-health-and-wellness brand — toxin-tested coffee, C8 MCT oil, collagen, creamers and
-supplements — founded in 2013 by Dave Asprey and sold direct-to-consumer and through
-national retail.
+Bulletproof (Bulletproof 360, Inc.) is a Seattle-founded functional nutrition and health-and-wellness brand — toxin-tested coffee, C8 MCT oil, collagen, creamers and supplements — founded in 2013 by Dave Asprey and sold direct-to-consumer and through national retail. Bulletproof is not a software vendor and publishes no developer program, yet its commerce and content stacks expose a real, callable, unauthenticated machine surface: a Shopify Storefront GraphQL API that answers introspection anonymously at shop.bulletproof.com, a live UCP (Universal Commerce Protocol) MCP endpoint whose tools/list returns 13 agent tools with full JSON Schema input contracts, OAuth 2.0 / OpenID Connect discovery documents for customer accounts, agent-facing llms.txt and agents.md instructions on the storefront, and a 384-route WordPress REST API behind the editorial site.
 
-Bulletproof is not a software vendor and publishes no developer program, no API
-reference and no `security.txt`. It nonetheless exposes a real, callable, largely
-unauthenticated machine surface, all of it profiled here from public probes on
-2026-08-08:
+**Areas:** Company · Consumer Packaged Goods · Food and Beverage · Health and Wellness · Supplements · E-Commerce · Direct to Consumer · Retail · Agentic Commerce · Shopify
 
-- **Storefront GraphQL API** — `https://shop.bulletproof.com/api/2026-01/graphql.json`
-  answered anonymous introspection: 424 types, 36 root queries, 41 mutations. SDL in
-  [`graphql/`](graphql/).
-- **UCP agentic-commerce MCP endpoint** — `https://shop.bulletproof.com/api/ucp/mcp`
-  returned 13 tools with full JSON Schema input contracts from an anonymous
-  `tools/list`. Manifest and verbatim tool list in [`mcp/`](mcp/).
-- **Agent instructions** — the store serves its own `/agents.md` and `/llms.txt`,
-  including an explicit buyer-approval rule on checkout. Captured verbatim in
-  [`skills/`](skills/) and [`llms/`](llms/).
-- **OAuth 2.0 / OpenID Connect discovery** for customer accounts, plus an RFC 9728
-  protected-resource document. Captured in [`well-known/`](well-known/).
-- **WordPress REST API** behind the editorial site: 16 namespaces, 384 routes, no
-  advertised authentication.
+## BulletProof on APIs.io
 
-No A2A agent card was found on any host, so none was authored.
+Everything profiled for BulletProof is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/bulletproof/](https://apis.io/providers/bulletproof/)** — or go straight to one of the APIs or properties below.
 
-- Company: https://www.bulletproof.com/
-- Store: https://shop.bulletproof.com/
-- Secondary market: https://forgeglobal.com/bulletproof_stock/
+### APIs (4)
+
+- [Bulletproof Storefront GraphQL API](https://apis.io/apis/bulletproof/bulletproof-storefront-graphql-api/) — The Shopify Storefront GraphQL API served from the Bulletproof store host. Anonymous introspection succeeded on 2026-08-08 (424 types, QueryRoot +…
+- [Bulletproof UCP Agentic Commerce MCP](https://apis.io/apis/bulletproof/bulletproof-ucp-agentic-commerce-mcp/) — A live Model Context Protocol endpoint implementing the Universal Commerce Protocol (UCP) for agent-driven commerce. An anonymous tools/list returned 13…
+- [Bulletproof Storefront JSON Catalog](https://apis.io/apis/bulletproof/bulletproof-storefront-json-catalog/) — The unauthenticated Shopify storefront JSON catalog endpoints (/products.json, /collections.json, /products/{handle}.json,…
+- [BulletProof Website (WordPress REST)](https://apis.io/apis/bulletproof/bulletproof-com-website-wordpress-rest/) — The public WordPress REST API (wp-json) of the BulletProof website at www.bulletproof.com: the route index of the site's content management system,…
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [universal-commerce](https://apis.io/servers/bulletproof/universal-commerce/)
+
+#### Examples (3)
+
+Example requests and responses.
+
+- [Bulletproof Storefront Graphql Response](https://apis.io/examples/bulletproof/bulletproof-storefront-graphql-response/)
+- [Bulletproof Storefront Products Json](https://apis.io/examples/bulletproof/bulletproof-storefront-products-json/)
+- [Bulletproof Ucp Mcp Initialize](https://apis.io/examples/bulletproof/bulletproof-ucp-mcp-initialize/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Bulletproof Authentication](https://apis.io/security/bulletproof/bulletproof-authentication/)
+- [Bulletproof Domain Security](https://apis.io/security/bulletproof/bulletproof-domain-security/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Bulletproof Scopes](https://apis.io/scopes/bulletproof/bulletproof-scopes/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.bulletproof.com/)
+- [Documentation](https://shop.bulletproof.com/agents.md)
+- [Sign up](https://shop.bulletproof.com/account/login)
+- [Support](https://shop.bulletproof.com/pages/contact-us)
+- [Blog](https://www.bulletproof.com/blog/)
+- [Terms of service](https://shop.bulletproof.com/policies/terms-of-service)
+- [Privacy policy](https://shop.bulletproof.com/policies/privacy-policy)
+- [GitHub](https://github.com/bulletproof360)
+
+## API Evangelist rating
+
+**Kin Score 27.7** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 71.7 |
+| Contract quality | 14.5 |
+| Contract governance | 4.5 |
+| Operational transparency | 2.6 |
+| Developer ergonomics | 30.4 |
+| Access clarity | 34.2 |
+
+**Agent readiness 34.1** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | platform (partial credit) |
+| Auth Clarity | served (partial credit) |
+| Idempotency | derived (partial credit) |
+| Error Semantics | derived (partial credit) |
+| OpenAPI Examples | documented (partial credit) |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | verified |
+| Dynamic Client Registration | — |
+| Agentic Commerce | platform (partial credit) |
+
+**Regulatory alignment 32.8** — Health
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/bulletproof/](https://apis.io/providers/bulletproof/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for BulletProof: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/bulletproof/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
